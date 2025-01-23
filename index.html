@@ -1,29 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Flowchart Example</title>
-<!-- 引入 mermaid.js 库 -->
-<script src="https://cdn.jsdelivr.net/npm/mermaid@8/dist/mermaid.min.js"></script>
-<script>
-  // 初始化 mermaid.js
-  mermaid.initialize({startOnLoad:true});
-</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My GitHub Homepage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    header {
+      background-color: #282c34;
+      color: white;
+      padding: 20px 0;
+    }
+    h1 {
+      margin: 0;
+    }
+    a {
+      color: #61dafb;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    footer {
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #777;
+    }
+  </style>
 </head>
 <body>
-
-<h1>My Flowchart</h1>
-
-<!-- 创建一个包含流程图定义的 <div> 元素 -->
-<div class="mermaid">
-graph LR
-    A[Start] --> B{Decision}
-    B -- Yes --> C[Do Something]
-    B -- No --> D[Do Something Else]
-    C --> E[End]
-    D --> E
-</div>
-
+  <header>
+    <h1>My GitHub Homepage</h1>
+  </header>
+  <main>
+    <p>Hi, I'm <strong>浩翔</strong>.</p>
+    <p>You can reach me at <a href="mailto:your-email@example.com">your-email@example.com</a>.</p>
+  </main>
+  <footer>
+    <p>© 2025 浩翔</p>
+  </footer>
 </body>
 </html>
