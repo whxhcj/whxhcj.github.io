@@ -27,13 +27,13 @@
 <meta property="og:site_name" content="小洋芋">
 <meta property="og:description" content="蚁群算法 概念 蚁群算法（Ant Colony Optimization, ACO）是一种受自然界蚂蚁觅食行为的正反馈机制启发的仿生优化算法。在自然界中，蚂蚁通过在路径上释放信息素（pheromone）来标记行进路线，其他蚂蚁倾向于选择信息素浓度较高的路径，从而逐渐收敛到从巢穴到食物源的最短路径。 应用 旅行商问题（TSP） 给定一组城市 \(C &#x3D; \{c_1, c_2, ...,">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://whxhcj.github.io/2025/03/24/images/Ant-Colony-Optimization/ACO.png">
+<meta property="og:image" content="https://whxhcj.github.io/images/Ant-Colony-Optimization/ACO2.png">
 <meta property="article:published_time" content="2025-03-24T12:07:02.000Z">
-<meta property="article:modified_time" content="2025-03-24T14:00:40.637Z">
+<meta property="article:modified_time" content="2025-03-24T14:40:00.305Z">
 <meta property="article:author" content="吴浩翔">
 <meta property="article:tag" content="生物智能">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://whxhcj.github.io/2025/03/24/images/Ant-Colony-Optimization/ACO.png">
+<meta name="twitter:image" content="https://whxhcj.github.io/images/Ant-Colony-Optimization/ACO2.png">
 
 <link rel="canonical" href="https://whxhcj.github.io/2025/03/24/Ant-Colony-Optimization/">
 
@@ -209,7 +209,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-03-24 20:07:02 / 修改时间：22:00:40" itemprop="dateCreated datePublished" datetime="2025-03-24T20:07:02+08:00">2025-03-24</time>
+              <time title="创建时间：2025-03-24 20:07:02 / 修改时间：22:40:00" itemprop="dateCreated datePublished" datetime="2025-03-24T20:07:02+08:00">2025-03-24</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -336,10 +336,7 @@ L_k = \sum_{i=1}^{n} d_{c_i, c_{i+1}}, \quad \text{其中 } c_{n+1} = c_1
 class="math inline">\(P_k\)</span>）才执行的。并且并不是在每次蚂蚁转移后都立即对路径上的信息素进行更新，而是在所有蚂蚁都完成一遍对所有城市的访问后，才统一更新各路径信息素的浓度。</p>
 <p>各路径上的信息素可以被记录在一个矩阵中。</p>
 <h4 id="完整流程">完整流程</h4>
-<figure>
-<img src="./../images/Ant-Colony-Optimization/ACO.png" alt="ACO" />
-<figcaption aria-hidden="true">ACO</figcaption>
-</figure>
+<p><img src="/images/Ant-Colony-Optimization/ACO2.png" /></p>
 <p>超参数设置中，蚁群数量最好为目标城市数量的 <span
 class="math inline">\(1.5\)</span> 倍，信息素挥发因子 <span
 class="math inline">\(ρ\)</span> 一般设置在 <span

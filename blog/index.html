@@ -204,7 +204,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2025-03-24 20:07:02 / 修改时间：22:00:40" itemprop="dateCreated datePublished" datetime="2025-03-24T20:07:02+08:00">2025-03-24</time>
+              <time title="创建时间：2025-03-24 20:07:02 / 修改时间：22:40:00" itemprop="dateCreated datePublished" datetime="2025-03-24T20:07:02+08:00">2025-03-24</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -331,10 +331,7 @@ L_k = \sum_{i=1}^{n} d_{c_i, c_{i+1}}, \quad \text{其中 } c_{n+1} = c_1
 class="math inline">\(P_k\)</span>）才执行的。并且并不是在每次蚂蚁转移后都立即对路径上的信息素进行更新，而是在所有蚂蚁都完成一遍对所有城市的访问后，才统一更新各路径信息素的浓度。</p>
 <p>各路径上的信息素可以被记录在一个矩阵中。</p>
 <h4 id="完整流程">完整流程</h4>
-<figure>
-<img src="./../images/Ant-Colony-Optimization/ACO.png" alt="ACO" />
-<figcaption aria-hidden="true">ACO</figcaption>
-</figure>
+<p><img src="/images/Ant-Colony-Optimization/ACO2.png" /></p>
 <p>超参数设置中，蚁群数量最好为目标城市数量的 <span
 class="math inline">\(1.5\)</span> 倍，信息素挥发因子 <span
 class="math inline">\(ρ\)</span> 一般设置在 <span
