@@ -179,6 +179,188 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://whxhcj.github.io/2025/03/24/Ant-Colony-Optimization/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="吴浩翔">
+      <meta itemprop="description" content="一个简单的个人博客">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小洋芋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2025/03/24/Ant-Colony-Optimization/" class="post-title-link" itemprop="url">Ant Colony Optimization</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2025-03-24 20:07:02 / 修改时间：22:00:40" itemprop="dateCreated datePublished" datetime="2025-03-24T20:07:02+08:00">2025-03-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%A0%94%E7%A9%B6%E7%94%9F%E8%AF%BE%E7%A8%8B/" itemprop="url" rel="index"><span itemprop="name">研究生课程</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%A0%94%E7%A9%B6%E7%94%9F%E8%AF%BE%E7%A8%8B/%E7%94%9F%E7%89%A9%E6%99%BA%E8%83%BD%E4%B8%8E%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">生物智能与算法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="蚁群算法">蚁群算法</h1>
+<h2 id="概念">概念</h2>
+<p>蚁群算法（Ant Colony Optimization,
+ACO）是一种受自然界蚂蚁觅食行为的正反馈机制启发的仿生优化算法。在自然界中，蚂蚁通过在路径上释放信息素（pheromone）来标记行进路线，其他蚂蚁倾向于选择信息素浓度较高的路径，从而逐渐收敛到从巢穴到食物源的最短路径。</p>
+<h2 id="应用">应用</h2>
+<h3 id="旅行商问题tsp">旅行商问题（TSP）</h3>
+<p>给定一组城市 <span class="math inline">\(C = \{c_1, c_2, ...,
+c_n\}\)</span>，旅行商需要从某个城市出发，访问每个城市一次且仅一次，最终回到起点，使得总路程最短。</p>
+<h4 id="状态转移概率">状态转移概率</h4>
+<p>假设蚂蚁种群的规模为 <span class="math inline">\(m\)</span>
+，城市的数量为 <span class="math inline">\(n\)</span> ，城市 <span
+class="math inline">\(i\)</span> 和城市 <span
+class="math inline">\(j\)</span> 之间的距离记为 <span
+class="math inline">\(d_{i,j}\)</span> 。</p>
+<p>在初始情况下，所有蚂蚁分布在各个城市里，各个城市连接路径上的信息素浓度都相同，设为
+<span class="math inline">\(\tau_{init}\)</span>，即有： <span
+class="math display">\[
+\tau_{i,j}(0)=\tau_{init}
+\]</span> 蚂蚁 <span class="math inline">\(k\)</span> 从城市 <span
+class="math inline">\(i\)</span> 移动到城市 <span
+class="math inline">\(j\)</span> 的概率为： <span
+class="math display">\[
+P_{ij}^{(k)}(t) =
+\begin{cases}
+\displaystyle \frac{[\tau_{ij}(t)]^{\alpha} \cdot
+[\eta_{ij}]^{\beta}}{\sum\limits_{l \in \text{allowed}_k}
+[\tau_{il}(t)]^{\alpha} \cdot [\eta_{il}]^{\beta}}, &amp; \text{if } j
+\in \text{allowed}_k \\
+0, &amp; \text{otherwise}
+\end{cases}
+\]</span> 其中：</p>
+<ul>
+<li><span class="math inline">\(\tau_{ij}(t)\)</span>：在时刻 <span
+class="math inline">\(t\)</span> 时城市 <span
+class="math inline">\(i\)</span> 到 <span
+class="math inline">\(j\)</span> 之间的路径 <span
+class="math inline">\((i,j)\)</span> 上的信息素浓度；</li>
+<li><span class="math inline">\(\eta_{ij} =
+\frac{1}{d_{ij}}\)</span>：启发函数，通常为城市间距离的倒数；</li>
+<li><span
+class="math inline">\(\alpha\)</span>：控制信息素的重要程度；当 <span
+class="math inline">\(\alpha=0\)</span>
+时，转移概率只跟距离有关，算法退化成关于路径距离的贪婪算法。</li>
+<li><span
+class="math inline">\(\beta\)</span>：控制启发函数的重要程度；当 <span
+class="math inline">\(\beta=0\)</span> 时，则会退化成随机搜索算法。</li>
+<li><span class="math inline">\(\text{allowed}_k\)</span>：蚂蚁 <span
+class="math inline">\(k\)</span>
+尚未访问过的城市集合，每次到达一个城市时进行更新。</li>
+</ul>
+<p>确定各个城市的转移概率后，我们就可以使用<strong>轮盘赌算法</strong>来依照概率选择一个城市作为目的地。</p>
+<p><strong>注意：</strong>如果 <span
+class="math inline">\(\alpha\)</span>
+过分大，启发值几乎不起作用，并且一开始所有路径信息素初值一致，该算法就相当于蚂蚁随机走动。如果
+<span class="math inline">\(\beta\)</span>
+值（启发值重要程度）过分大，则蚂蚁的每次选择几乎根据路径长度决定，该算法就相当于贪心策略，很难搜索到全局最优解。通常我们将
+<span class="math inline">\(\alpha\)</span> 设置为 1 而将 <span
+class="math inline">\(\beta\)</span> 设置成 6。</p>
+<h4 id="信息素更新公式">信息素更新公式</h4>
+<p>在每一轮迭代结束后，信息素会进行挥发与增强。 <span
+class="math display">\[
+\tau_{ij}(t+1) = (1 - \rho) \cdot \tau_{ij}(t) + \sum_{k=1}^{m} \Delta
+\tau_{ij}^{(k)}(t)
+\]</span> 其中：</p>
+<ul>
+<li><span class="math inline">\(\rho \in
+(0,1)\)</span>：信息素挥发系数；</li>
+<li><span class="math inline">\(\Delta \tau_{ij}^{(k)}(t)\)</span>：蚂蚁
+<span class="math inline">\(k\)</span> 在本轮内在边 <span
+class="math inline">\((i,j)\)</span> 上留下的信息素增量。</li>
+</ul>
+<p>信息素增量有多种定义。最基础的定义为： <span class="math display">\[
+\Delta \tau_{ij}^{(k)}(t) =
+\begin{cases}
+\displaystyle \frac{Q}{L_k}, &amp; \text{若蚂蚁 } k \text{ 走过边 }
+(i,j) \\
+0, &amp; \text{否则}
+\end{cases}
+\]</span> 其中：</p>
+<ul>
+<li><span
+class="math inline">\(Q\)</span>：常数，控制信息素的总量；</li>
+<li><span class="math inline">\(L_k\)</span>：蚂蚁 <span
+class="math inline">\(k\)</span> 经过的路径总长度。</li>
+</ul>
+<p>假设总共有 <span class="math inline">\(n\)</span> 个城市，蚂蚁 <span
+class="math inline">\(k\)</span> 构建的路径为： <span
+class="math display">\[
+P_k = (c_1, c_2, ..., c_n, c_1)
+\]</span> 其中 <span class="math inline">\(c_1\)</span>
+是起始城市，最终回到它。路径总长度 <span
+class="math inline">\(L_k\)</span>​ 是： <span class="math display">\[
+L_k = \sum_{i=1}^{n} d_{c_i, c_{i+1}}, \quad \text{其中 } c_{n+1} = c_1
+\]</span> 注意：虽然在时刻 <span class="math inline">\(t\)</span> 蚂蚁
+<span class="math inline">\(k\)</span>
+未完成周游，但是信息素的更新并不是即刻的，而是滞后到所有蚂蚁完成一趟周游后（即得到完整的
+<span
+class="math inline">\(P_k\)</span>）才执行的。并且并不是在每次蚂蚁转移后都立即对路径上的信息素进行更新，而是在所有蚂蚁都完成一遍对所有城市的访问后，才统一更新各路径信息素的浓度。</p>
+<p>各路径上的信息素可以被记录在一个矩阵中。</p>
+<h4 id="完整流程">完整流程</h4>
+<figure>
+<img src="./../images/Ant-Colony-Optimization/ACO.png" alt="ACO" />
+<figcaption aria-hidden="true">ACO</figcaption>
+</figure>
+<p>超参数设置中，蚁群数量最好为目标城市数量的 <span
+class="math inline">\(1.5\)</span> 倍，信息素挥发因子 <span
+class="math inline">\(ρ\)</span> 一般设置在 <span
+class="math inline">\([0.2,0.5]\)</span> ，迭代次数一般设置在 <span
+class="math inline">\([100,500]\)</span> ，在 <code>scikit-opt</code>
+库中，信息素常量 <span class="math inline">\(Q\)</span> 的值被默认为
+<span class="math inline">\(1\)</span>。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://whxhcj.github.io/2025/03/24/Biological-Intelligence-and-Algorithms/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -748,7 +930,7 @@ target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
